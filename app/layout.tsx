@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -13,9 +14,39 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+      <title>Saul Garay</title>
+      </head>
+      
+      <body className={inter.className}>
+        <div>
+          <div className='bg-oxford-blue-900 flex flex-row justify-between h-16 w-full'>
+            <button className='btn-nav'>
+              Home
+            </button>
+
+            <div className='flex flex-row justify-end items-center'>
+              <Link href='/chat' className='btn-nav'>
+                Chat
+              </Link>
+              <Link href='/create/chat' className='btn-nav'>
+                Create Chat
+              </Link>
+
+              <Link href='/account' className='btn-nav'>
+                Account
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {children}
+      </body>
     </html>
   )
 }

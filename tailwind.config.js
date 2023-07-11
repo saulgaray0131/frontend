@@ -7,12 +7,34 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      fontFamily: {
+        nunito: ['Nunito', 'sans-serif']
       },
+      spacing: {
+        '88' : '352px',
+        '92' : '368px',
+        '124' : '496px'
+      },
+      colors: {
+        'oxford-blue': {
+          '50': '#f6f7f9',
+          '100': '#eceef2',
+          '200': '#d4dae3',
+          '300': '#afbaca',
+          '400': '#8495ac',
+          '500': '#647793',
+          '600': '#506079',
+          '700': '#414e63',
+          '800': '#374151',
+          '900': '#333b47',
+          '950': '#22272f',
+      },
+      
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    // ...
+    require('tailwind-scrollbar'),
+],
 }
