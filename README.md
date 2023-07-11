@@ -25,7 +25,7 @@ To get started with the development environment, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/chat-bot-frontend.git
+git clone https://github.com/saulgaray0131/frontend
 ```
 
 2. Navigate to the project directory:
@@ -65,6 +65,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For any inquiries or feedback, please contact [Saul](mailto:saulgaray0131@gmail.com).
+For any inquiries or feedback, please contact [me](mailto:saulgaray0131@gmail.com).
 
 Happy chatting!
