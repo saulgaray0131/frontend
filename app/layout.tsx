@@ -27,17 +27,13 @@ export default function RootLayout({
         <div>
           <div className='bg-oxford-blue-900 flex flex-row justify-between h-16 w-full'>
             <button className='btn-nav'>
-              Home
+              Ai Character Chat
             </button>
 
             <div className='flex flex-row justify-end items-center'>
               <Link href='/chat' className='btn-nav'>
                 Chat
               </Link>
-              <Link href='/create/chat' className='btn-nav'>
-                Create Chat
-              </Link>
-
               <Link href='/account' className='btn-nav'>
                 Account
               </Link>

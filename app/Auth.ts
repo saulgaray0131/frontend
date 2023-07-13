@@ -5,13 +5,6 @@ interface props {
     setUser: Function
 }
 
-interface UserData {
-    id: number,
-    username: string,
-    url: string,
-    uuid: string
-}
-
 function isUserData(item: any): item is UserData {
     return 'id' in item;
 }
