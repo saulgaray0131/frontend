@@ -1,5 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { useEffect, useState } from "react";
+import config from "../config";
 
 interface Props {
     setIsOpen: Function,
@@ -19,7 +20,7 @@ export default function CreateChatDialog(props: Props) {
     const [botData, setBotData] = useState([])
 
     useEffect(() => {
-        fetch('/api/bots')
+        fetch(config().apiUrl +  '/api/bots')
             .then(results => results.json())
             .then(data => {
                 setBotData(data)
@@ -28,7 +29,7 @@ export default function CreateChatDialog(props: Props) {
     }, [])
 
     const createChat = async (id: number) => {
-        fetch('/api/create/chat', {
+        fetch(config().apiUrl +  '/api/create/chat', {
           method: 'POST',
           body: JSON.stringify({
             aiId: id,

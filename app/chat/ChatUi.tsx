@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DotPulse } from '@uiball/loaders'
-
+import config from "../config";
 
 
 interface UserData {
@@ -46,7 +46,7 @@ export default function ChatUi(props: Props) {
 
             setLoading(true);
 
-            fetch('/api/chat', {
+            fetch(config().apiUrl +  '/api/chat', {
                 method: 'POST',
                 body: JSON.stringify({
                     user: props.user,
@@ -74,7 +74,7 @@ export default function ChatUi(props: Props) {
 
             console.log(props.user)
 
-            fetch('/api/chatdata', {
+            fetch(config().apiUrl +  '/api/chatdata', {
                 method: 'POST',
                 body: JSON.stringify({
                     user: props.user,

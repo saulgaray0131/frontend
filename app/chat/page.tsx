@@ -4,6 +4,7 @@ import Auth from "../Auth";
 import ChatUi from "./ChatUi";
 import CreateChatDialog from "./CreateChatDialog";
 import { Transition } from "@headlessui/react";
+import config from "../config";
 
 export default function Page() {
 
@@ -19,7 +20,7 @@ export default function Page() {
 
     const fetchChats = async () => {
         if (user && user.id != 0) {
-            const response = await fetch('/api/chats', {
+            const response = await fetch(config().apiUrl +  '/api/chats', {
                 method: 'POST',
                 body: JSON.stringify(user),
                 headers: {
@@ -38,7 +39,7 @@ export default function Page() {
     }, [user])
 
     useEffect(() => {
-        fetch(`/api/bots`)
+        fetch(config().apiUrl +  '/api/bots')
             .then(results => results.json())
             .then((data: Array<BotData>) => {
                 console.log(data);

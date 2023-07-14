@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
+import config from "./config";
 
 interface props {
     setUser: Function
@@ -21,7 +22,7 @@ export default function Auth(props: props) {
 
             console.log("Auth not found!")
 
-            fetch('/api/create/user', {
+            fetch(config().apiUrl +  '/api/create/user', {
                 method: 'POST',
                 body: JSON.stringify({
                     "username": "placeholder_name"
@@ -46,7 +47,7 @@ export default function Auth(props: props) {
         } else {
             console.log("set data", authCookie.user);
 
-            fetch('/api/account/data', {
+            fetch(config().apiUrl +  '/api/account/data', {
                 method: 'POST',
                 body: JSON.stringify({
                     user: authCookie.user

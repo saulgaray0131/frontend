@@ -1,6 +1,6 @@
 import { Popover } from "@headlessui/react";
 import { useState } from "react";
-
+import config from "../config";
 
 
 interface UserData {
@@ -22,7 +22,7 @@ export default function EditNamePopover(props: Props) {
     const sendNameChange = async () => {
         if(nameValue) {
 
-            fetch('/api/account/edit/username', {
+            fetch(config().apiUrl +  '/api/account/edit/username', {
                 method: 'POST',
                 body: JSON.stringify({
                     user: props.user,
