@@ -5,7 +5,7 @@ interface Config {
 
 export default function config() {
     const config:Config = {
-        apiUrl: "https://143.198.107.25:8443"
+        apiUrl: "https://api.cultchatai.com:8443"
     }
 
     return config;
