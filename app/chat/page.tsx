@@ -128,7 +128,7 @@ export default function Page() {
                             </button>
                         </div>
 
-                        <div className={'flex flex-col items-start justify-start overflow-y-auto scrollbar-thin p-2 scrollbar-thumb-oxford-blue-700 dark:scrollbar-thumb-zinc-800 scrollbar-track-zinc-200 w-full h-full bg-transparent overflow-hidden'}>
+                        <div className={'flex flex-col items-start justify-start overflow-y-auto scrollbar-thin p-2 scrollbar-thumb-oxford-blue-700 dark:scrollbar-thumb-zinc-900 scrollbar-track-zinc-200 w-full h-full bg-transparent overflow-hidden'}>
                             {chatData.map((data: ChatData) => {
                                 const chatBot = botData.find((val: BotData) => {
                                     if (data.aiuserId == val.id)

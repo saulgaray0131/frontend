@@ -170,7 +170,7 @@ export default function ChatUi(props: Props) {
                 <textarea onChange={e => setTextVal(e.target.value)} placeholder='Chat with your AI here...' value={textVal} className='w-full h-16 min-h-[4rem] max-h-24 p-2 focus:outline-none rounded-lg shadow-md dark:bg-zinc-600 dark:text-zinc-200 placeholder-zinc-400'>
                 </textarea>
                 <button onClick={() => { sendChat(textVal); setTextVal('') }} className='bg-oxford-blue-500 hover:bg-oxford-blue-600 dark:bg-zinc-600 focus:ring-oxford-blue-300 focus:outline-none text-bold w-24 h-full rounded-lg shadow-md'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 mx-auto text-black/80">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 mx-auto text-zinc-300">
                         <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
                     </svg>
                 </button>
