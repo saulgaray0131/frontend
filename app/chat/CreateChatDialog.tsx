@@ -6,7 +6,8 @@ interface Props {
     setIsOpen: Function,
     isOpen: boolean,
     user: UserData,
-    updateChats: Function
+    updateChats: Function,
+    setChatId: Function
 }
 
 interface b_data {
@@ -41,9 +42,10 @@ export default function CreateChatDialog(props: Props) {
             }
         })
             .then(results => results.json())
-            .then((data) => {
+            .then((data: ChatData) => {
                 props.setIsOpen(false);
                 props.updateChats();
+                props.setChatId(data.id);
                 console.log(data);
             });
     }

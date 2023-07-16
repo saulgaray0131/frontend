@@ -99,8 +99,8 @@ export default function ChatUi(props: Props) {
 
     if (props.id == 0) {
         return (
-            <div className='w-full h-full flex flex-col gap-4 rounded p-4 pb-8 justify-center'>
-                <h1 className='text-oxford-blue-100 font-bold text-5xl text-center'>Select a chat to begin...</h1>
+            <div className='w-full h-full flex flex-col gap-4 rounded p-4 pb-8'>
+                <h1 className='text-oxford-blue-100 font-bold text-xl'>← Click here to begin</h1>
             </div>
         )
     }

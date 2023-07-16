@@ -6,6 +6,7 @@ import CreateChatDialog from "./CreateChatDialog";
 import { Transition } from "@headlessui/react";
 import config from "../config";
 import 'animate.css';
+import { useCookies } from "react-cookie";
 
 export default function Page() {
 
@@ -22,6 +23,7 @@ export default function Page() {
     const [menuShowing, setMenuShowing] = useState(true);
     const [showSideButton, setShowSideButton] = useState(!menuShowing);
     const chatRef = useRef<HTMLDivElement>(null);
+    const [chatCookie, setChatCookie, ds2] = useCookies(['chatCookie']);
 
     const fetchChats = async () => {
         if (user && user.id != 0) {
@@ -54,7 +56,7 @@ export default function Page() {
 
 
     const getNavTitle = () => {
-        if (chatId == 0)
+        if (chatId == 0 || user.id == 0)
             return "";
 
         return (
@@ -70,6 +72,20 @@ export default function Page() {
         if (chatRef.current)
             chatRef.current.className += " bg-zinc-600";
     }, [chatId])
+
+    //ds2('chatCookie')
+
+    useEffect(() => {
+        if(chatCookie.chatCookie && chatCookie.chatCookie != 0)
+         setChatId(chatCookie.chatCookie.id);
+         //ds2('chatCookie')
+    }, [])
+
+    console.log(chatId);
+    console.log(chatCookie);
+
+    if(user.id == 0)
+        return <Auth setUser={setUser}></Auth>;
 
     return (
         <div className='dark'>
@@ -126,7 +142,7 @@ export default function Page() {
 
                                 return (
                                     <div className={'flex flex-row w-full h-16 p-2 gap-2 hover:bg-oxford-blue-600 dark:hover:bg-zinc-500 rounded-lg' + (data.id == chatId ? ' dark:bg-zinc-600 dark:hover:bg-zinc-600' : ' ')}
-                                        key={data.id} onClick={() => setChatId(data.id)}
+                                        key={data.id} onClick={() => { setChatId(data.id); setChatCookie('chatCookie', {id: data.id}, {path: '/', maxAge: 5184000})}}
                                         ref={data.id == chatId ? chatRef : null}
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0 text-zinc-200">
@@ -156,7 +172,7 @@ export default function Page() {
                 <ChatUi title={getNavTitle()} user={user} id={chatId} fetchChats={fetchChats}></ChatUi>
 
 
-                <CreateChatDialog user={user} isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} updateChats={fetchChats}></CreateChatDialog>
+                <CreateChatDialog user={user} isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} updateChats={fetchChats} setChatId={(id: number) => { setChatId(id); setChatCookie('chatCookie', {id: id}, {path: '/', maxAge: 5184000})}}></CreateChatDialog>
             </main>
         </div >
     )
