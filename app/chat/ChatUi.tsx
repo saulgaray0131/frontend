@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DotPulse } from '@uiball/loaders'
 import config from "../config";
 
@@ -12,12 +12,9 @@ interface UserData {
 
 interface Props {
     user: UserData,
-    id: number
-}
-
-interface ChatData {
-    user: UserData,
-
+    id: number,
+    title: string,
+    fetchChats: Function
 }
 
 interface ChatLine {
@@ -34,6 +31,7 @@ export default function ChatUi(props: Props) {
     const [chatLines, setChatLines] = useState<ChatLine[]>([]);
     const [textVal, setTextVal] = useState('');
     const [loading, setLoading] = useState(false);
+    const chatEndRef = useRef<HTMLDivElement>(null);
 
     const sendChat = async (text: string) => {
         if (text) {
@@ -46,7 +44,7 @@ export default function ChatUi(props: Props) {
 
             setLoading(true);
 
-            fetch(config().apiUrl +  '/api/chat', {
+            fetch(config().apiUrl + '/api/chat', {
                 method: 'POST',
                 body: JSON.stringify({
                     user: props.user,
@@ -64,6 +62,7 @@ export default function ChatUi(props: Props) {
                 .then((data: ChatLine[]) => {
                     setChatLines([...chatLines, data[0], data[1]])
                     setLoading(false);
+                    props.fetchChats();
                 });
         }
     }
@@ -74,7 +73,7 @@ export default function ChatUi(props: Props) {
 
             console.log(props.user)
 
-            fetch(config().apiUrl +  '/api/chatdata', {
+            fetch(config().apiUrl + '/api/chatdata', {
                 method: 'POST',
                 body: JSON.stringify({
                     user: props.user,
@@ -93,6 +92,11 @@ export default function ChatUi(props: Props) {
         }
     }, [props.id]);
 
+    useEffect(() => {
+        if(chatEndRef.current)
+            chatEndRef.current?.scrollIntoView({ behavior: "smooth"})
+    }, [chatLines])
+
     if (props.id == 0) {
         return (
             <div className='w-full h-full flex flex-col gap-4 rounded p-4 pb-8 justify-center'>
@@ -103,19 +107,19 @@ export default function ChatUi(props: Props) {
 
     return (
         <div className='w-full h-full flex flex-col gap-4 rounded p-4 pb-8'>
-
-            <div className='w-full h-full flex flex-col gap-3 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-oxford-blue-700 scrollbar-track-oxford-blue-100'>
+            <h1 className='dark:text-zinc-100 font-bold text-lg'>{props.title}</h1>
+            <div className='w-full h-full flex flex-col gap-3 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-oxford-blue-700 dark:scrollbar-thumb-zinc-800 scrollbar-track-zinc-200'>
                 {chatLines.map((val: ChatLine) => {
 
                     if (props.user.id == val.userId) {
                         return (
                             <div className='flex flex-row self-end max-w-[95%] gap-1' key={val.id}>
 
-                                <div key={val.id} className='h-fit bg-oxford-blue-500 rounded p-2'>
-                                    <p className='text-sm font-sans'>{val.text}</p>
+                                <div key={val.id} className='h-fit bg-oxford-blue-500 dark:bg-zinc-700 rounded p-2'>
+                                    <p className='text-sm font-sans dark:text-zinc-200'>{val.text}</p>
                                 </div>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0 dark:text-zinc-200">
                                     <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
                                 </svg>
 
@@ -124,12 +128,12 @@ export default function ChatUi(props: Props) {
                     } else {
                         return (
                             <div className='flex flex-row self-start max-w-[95%] gap-0 md:gap-2' key={val.id}>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0 dark:text-zinc-200">
                                     <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
                                 </svg>
 
-                                <div key={val.id} className='h-fit bg-oxford-blue-400 rounded p-1 md:p-4'>
-                                    <p className='text-sm font-sans'>{val.text}</p>
+                                <div key={val.id} className='h-fit bg-oxford-blue-400 dark:bg-zinc-800 rounded p-1 md:p-4'>
+                                    <p className='text-sm font-sans dark:text-zinc-200'>{val.text}</p>
                                 </div>
 
 
@@ -141,15 +145,15 @@ export default function ChatUi(props: Props) {
 
                 {loading ?
                     <div className='flex flex-row self-start max-w-[95%] gap-0 md:gap-2' >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0 dark:text-zinc-200">
                             <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
                         </svg>
 
-                        <div className='h-fit bg-oxford-blue-400 rounded p-1 md:p-4'>
+                        <div className='h-fit bg-oxford-blue-400 dark:bg-zinc-800 rounded p-1 md:p-4'>
                             <DotPulse
                                 size={40}
                                 speed={1.3}
-                                color="black"
+                                color="white"
                             />
                         </div>
 
@@ -158,14 +162,14 @@ export default function ChatUi(props: Props) {
                     : null
                 }
 
-
+                <div ref={chatEndRef} />
 
             </div>
 
             <div className='flex flex-row mx-auto w-full md:w-4/5 px-4 gap-2 mt-auto'>
-                <textarea onChange={e => setTextVal(e.target.value)} placeholder='Chat with your AI here...' value={textVal} className='w-full h-16 focus:outline-none rounded-lg shadow-md'>
+                <textarea onChange={e => setTextVal(e.target.value)} placeholder='Chat with your AI here...' value={textVal} className='w-full h-16 min-h-[4rem] max-h-24 p-2 focus:outline-none rounded-lg shadow-md dark:bg-zinc-600 dark:text-zinc-200 placeholder-zinc-400'>
                 </textarea>
-                <button onClick={() => { sendChat(textVal); setTextVal('') }} className='bg-oxford-blue-500 hover:bg-oxford-blue-600 active:bg-oxford-blue-700 focus:ring-oxford-blue-300 focus:outline-none text-bold w-24 h-full rounded-lg shadow-md'>
+                <button onClick={() => { sendChat(textVal); setTextVal('') }} className='bg-oxford-blue-500 hover:bg-oxford-blue-600 dark:bg-zinc-600 focus:ring-oxford-blue-300 focus:outline-none text-bold w-24 h-full rounded-lg shadow-md'>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 mx-auto text-black/80">
                         <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
                     </svg>

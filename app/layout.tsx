@@ -20,27 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <title>Saul Garay</title>
+      <title>Cult Chat</title>
       </head>
       
       <body className={inter.className}>
-        <div>
-          <div className='bg-oxford-blue-900 flex flex-row justify-between h-16 w-full'>
-            <button className='btn-nav'>
-              Ai Character Chat
-            </button>
-
-            <div className='flex flex-row justify-end items-center'>
-              <Link href='/chat' className='btn-nav'>
-                Chat
-              </Link>
-              <Link href='/account' className='btn-nav'>
-                Account
-              </Link>
-            </div>
-          </div>
-        </div>
-
         {children}
       </body>
     </html>

@@ -4,7 +4,7 @@ export default function ChatLayout({
     children: React.ReactNode
   }) {
     return (
-      <section>
+      <section className="dark">
         {children}
       </section>
     )
