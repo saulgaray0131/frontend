@@ -16,11 +16,11 @@ export default function Auth(props: props) {
     //ds('user')
 
     useEffect(() => {
-        console.log(authCookie);
+        //console.log(authCookie);
 
         if (!authCookie.user || !isUserData(authCookie.user)) {
 
-            console.log("Auth not found!")
+            //console.log("Auth not found!")
 
             fetch(config().apiUrl +  '/api/create/user', {
                 method: 'POST',
@@ -35,17 +35,17 @@ export default function Auth(props: props) {
                 .then(results => results.json())
                 .then((data: UserData) => {
                     if(!isUserData(data)) {
-                        console.log("bad data", data);
+                        //console.log("bad data", data);
                         ds('user');
                     } else {
-                        console.log("good data", data);
+                       //console.log("good data", data);
                         setCookie('user', data, {path: '/', maxAge: 5184000});
                         props.setUser(data);
-                        console.log(data);
+                        //console.log(data);
                     }
                 });
         } else {
-            console.log("set data", authCookie.user);
+            //console.log("set data", authCookie.user);
 
             fetch(config().apiUrl +  '/api/account/data', {
                 method: 'POST',
@@ -60,13 +60,13 @@ export default function Auth(props: props) {
                 .then(results => results.json())
                 .then((data: UserData) => {
                     if(!isUserData(data)) {
-                        console.log("bad data", data);
+                        //console.log("bad data", data);
                         ds('user');
                     } else {
-                        console.log("good data", data);
+                        //console.log("good data", data);
                         setCookie('user', data, {path: '/', maxAge: 5184000});
                         props.setUser(data);
-                        console.log(data);
+                        //console.log(data);
                     }
                 });
         }

@@ -25,7 +25,7 @@ export default function CreateChatDialog(props: Props) {
             .then(results => results.json())
             .then(data => {
                 setBotData(data)
-                console.log(data)
+                //console.log(data)
             });
     }, [])
 
@@ -46,7 +46,7 @@ export default function CreateChatDialog(props: Props) {
                 props.setIsOpen(false);
                 props.updateChats();
                 props.setChatId(data.id);
-                console.log(data);
+                //console.log(data);
             });
     }
 

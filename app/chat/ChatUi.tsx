@@ -71,8 +71,6 @@ export default function ChatUi(props: Props) {
     useEffect(() => {
         if (props.id != 0) {
 
-            console.log(props.user)
-
             fetch(config().apiUrl + '/api/chatdata', {
                 method: 'POST',
                 body: JSON.stringify({
@@ -86,7 +84,7 @@ export default function ChatUi(props: Props) {
             })
                 .then(results => results.json())
                 .then((data) => {
-                    console.log(data);
+                    //console.log(data);
                     setChatLines(data.lines);
                 });
         }
@@ -163,6 +161,7 @@ export default function ChatUi(props: Props) {
                 }
 
                 <div ref={chatEndRef} />
+                
 
             </div>
 
