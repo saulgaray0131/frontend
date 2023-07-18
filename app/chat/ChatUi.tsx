@@ -100,12 +100,12 @@ export default function ChatUi(props: Props) {
         return (
             
             <div className='w-full h-full flex flex-col justify-center items-center p-4 pb-8'>
-                <div className='w-180 h-4/5 dark:bg-zinc-800 rounded shadow'>
+                <div className='md:w-180 md:h-4/5 dark:bg-zinc-800 rounded shadow'>
                     <div className=' dark:bg-zinc-800 rounded-t p-2 pb-4 border-b dark:border-zinc-400 flex-shrink-0'>
                         <h1 className='dark:text-zinc-200 text-2xl font-bold text-center'>Explore</h1>
                     </div>
 
-                    <div className='grid grid-cols-2 p-8 place-items-center gap-4'>
+                    <div className='grid grid-cols-2  p-2 md:p-8 place-items-center  gap-2 md:gap-4'>
                         <div className='flex flex-col'>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 mx-auto dark:text-zinc-200">
                                 <path fillRule="evenodd" d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z" clipRule="evenodd" />
@@ -121,22 +121,22 @@ export default function ChatUi(props: Props) {
                         </div>
 
 
-                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
+                        <div className='rounded dark:bg-zinc-600 p-2 md:h-20 md:w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
                             <p className='dark:text-zinc-100 text-sm font-medium'>{'"Tell me your story. What kind of things have you done?"'}</p>
                         </div>
-                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64'>
+                        <div className='rounded dark:bg-zinc-600 p-2 md:h-20 md:w-64'>
                             <p className='dark:text-zinc-100 text-sm font-medium'>Chat with 30+ distinct personalites. All completely unique</p>
                         </div>
-                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
+                        <div className='rounded dark:bg-zinc-600 p-2 md:h-20 md:w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
                             <p className='dark:text-zinc-100 text-sm font-medium'>{'"What kind of food do you eat? Make a recipe that I can use to make something"'}</p>
                         </div>
-                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64'>
+                        <div className='rounded dark:bg-zinc-600 p-2 md:h-20 md:w-64'>
                             <p className='dark:text-zinc-100 text-sm font-medium'>GPT based chat bot responds in character, using chosen personality</p>
                         </div>
-                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
+                        <div className='rounded dark:bg-zinc-600 p-2 md:h-20 md:w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
                             <p className='dark:text-zinc-100 text-sm font-medium'>{'"How would you solve this puzzle. ..."'}</p>
                         </div>
-                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64'>
+                        <div className='rounded dark:bg-zinc-600 p-2 md:h-20 md:w-64'>
                             <p className='dark:text-zinc-100 text-sm font-medium'>Create as many chats as you like. Chats are saved to your device for easy access</p>
                         </div>
                     </div>
