@@ -13,7 +13,8 @@ module.exports = {
       spacing: {
         '88': '352px',
         '92': '368px',
-        '124': '496px'
+        '124': '496px',
+        '180' : '720px'
       },
       colors: {
         'oxford-blue': {

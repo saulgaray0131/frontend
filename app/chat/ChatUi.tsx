@@ -14,7 +14,8 @@ interface Props {
     user: UserData,
     id: number,
     title: string,
-    fetchChats: Function
+    fetchChats: Function,
+    setShowMenu: Function
 }
 
 interface ChatLine {
@@ -91,14 +92,56 @@ export default function ChatUi(props: Props) {
     }, [props.id]);
 
     useEffect(() => {
-        if(chatEndRef.current)
-            chatEndRef.current?.scrollIntoView({ behavior: "smooth"})
+        if (chatEndRef.current)
+            chatEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [chatLines])
 
     if (props.id == 0) {
         return (
-            <div className='w-full h-full flex flex-col gap-4 rounded p-4 pb-8'>
-                <h1 className='text-oxford-blue-100 font-bold text-xl'>← Click here to begin</h1>
+            
+            <div className='w-full h-full flex flex-col justify-center items-center p-4 pb-8'>
+                <div className='w-180 h-4/5 dark:bg-zinc-800 rounded shadow'>
+                    <div className=' dark:bg-zinc-800 rounded-t p-2 pb-4 border-b dark:border-zinc-400 flex-shrink-0'>
+                        <h1 className='dark:text-zinc-200 text-2xl font-bold text-center'>Explore</h1>
+                    </div>
+
+                    <div className='grid grid-cols-2 p-8 place-items-center gap-4'>
+                        <div className='flex flex-col'>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 mx-auto dark:text-zinc-200">
+                                <path fillRule="evenodd" d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z" clipRule="evenodd" />
+                            </svg>
+                            <p className='dark:text-zinc-200 text-center'>Examples</p>
+                        </div>
+
+                        <div className='flex flex-col'>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 mx-auto dark:text-zinc-200">
+                                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                            </svg>
+                            <p className='dark:text-zinc-200 text-center'>Capabilites</p>
+                        </div>
+
+
+                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
+                            <p className='dark:text-zinc-100 text-sm font-medium'>{'"Tell me your story. What kind of things have you done?"'}</p>
+                        </div>
+                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64'>
+                            <p className='dark:text-zinc-100 text-sm font-medium'>Chat with 30+ distinct personalites. All completely unique</p>
+                        </div>
+                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
+                            <p className='dark:text-zinc-100 text-sm font-medium'>{'"What kind of food do you eat? Make a recipe that I can use to make something"'}</p>
+                        </div>
+                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64'>
+                            <p className='dark:text-zinc-100 text-sm font-medium'>GPT based chat bot responds in character, using chosen personality</p>
+                        </div>
+                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64 hover:dark:bg-zinc-500' onClick={() => props.setShowMenu(true)}>
+                            <p className='dark:text-zinc-100 text-sm font-medium'>{'"How would you solve this puzzle. ..."'}</p>
+                        </div>
+                        <div className='rounded dark:bg-zinc-600 p-2 h-20 w-64'>
+                            <p className='dark:text-zinc-100 text-sm font-medium'>Create as many chats as you like. Chats are saved to your device for easy access</p>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         )
     }
@@ -161,7 +204,7 @@ export default function ChatUi(props: Props) {
                 }
 
                 <div ref={chatEndRef} />
-                
+
 
             </div>
 

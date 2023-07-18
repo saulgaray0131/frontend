@@ -72,8 +72,8 @@ export default function Page() {
     //ds2('chatCookie')
 
     useEffect(() => {
-        if(chatCookie.chatCookie && chatCookie.chatCookie != 0)
-         setChatId(chatCookie.chatCookie.id);
+        //if(chatCookie.chatCookie && chatCookie.chatCookie != 0)
+         //setChatId(chatCookie.chatCookie.id);
          //ds2('chatCookie')
     }, [])
 
@@ -164,7 +164,7 @@ export default function Page() {
 
 
 
-                <ChatUi title={getNavTitle()} user={user} id={chatId} fetchChats={fetchChats}></ChatUi>
+                <ChatUi title={getNavTitle()} user={user} id={chatId} fetchChats={fetchChats} setShowMenu={setIsDialogOpen}></ChatUi>
 
 
                 <CreateChatDialog user={user} isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} updateChats={fetchChats} setChatId={(id: number) => { setChatId(id); setChatCookie('chatCookie', {id: id}, {path: '/', maxAge: 5184000})}}></CreateChatDialog>
